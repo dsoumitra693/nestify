@@ -27,13 +27,13 @@ To get started with **Monorepo Magic**, you can install it globally using npm or
 ### Using npx
 
 ```bash
-npx dsoumitra/nestify
+npx dsoumitra693/nestify
 ```
 
 Install Locally (Optional)
 If you want to install it locally:
 ```bash
-git clone https://github.com/dsoumitra/nestify.git
+git clone https://github.com/dsoumitra693/nestify.git
 cd nestify
 npm install or # yarn install
 ```
@@ -41,7 +41,7 @@ npm install or # yarn install
 Usage
 After installing, you can run the setup command:
 ```bash
-npx dsoumitra/nestify
+npx dsoumitra693/nestify
 #You will be prompted to enter the root folder name for your monorepo.
 ```
 
