@@ -1,0 +1,12 @@
+{
+  "name": "nestify",
+  "version": "1.0.0",
+  "bin": {
+    "setup-monorepo": "./setup-monorepo-ts.sh"
+  },
+  "scripts": {
+    "setup": "bash ./setup-monorepo-ts.sh"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
