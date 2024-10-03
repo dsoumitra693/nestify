@@ -101,7 +101,7 @@ chmod +x add-package.sh
 # ESLint and Prettier Setup
 echo "Setting up ESLint and Prettier..."
 
-yarn add eslint prettier eslint-config-prettier eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks -D
+yarn add eslint prettier eslint-config-prettier eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks -D --ignore-workspace-root-check
 
 # Create a common ESLint config
 cat <<EOL > .eslintrc.js
