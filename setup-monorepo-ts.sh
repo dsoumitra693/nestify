@@ -8,13 +8,13 @@ echo "Enter the root folder name:"
 read ROOT_FOLDER
 
 # Create the monorepo root directory
-mkdir $ROOT_FOLDER
-cd $ROOT_FOLDER
+mkdir "$ROOT_FOLDER"
+cd "$ROOT_FOLDER"
 
 # Initialize Yarn Workspace and Lerna
 echo "Initializing Yarn Workspaces and Lerna..."
 yarn init -y
-yarn add lerna -D
+yarn add lerna -D --ignore-workspace-root-check
 
 # Add Yarn Workspaces config to package.json
 cat <<EOL > package.json
@@ -40,22 +40,46 @@ npx lerna init
 # Create packages folder and sub-packages
 mkdir -p packages/{mobile,server,shared}
 
-# Initialize mobile (Expo app)
+# Initialize mobile (Expo app) package
 echo "Initializing mobile (Expo app)..."
 cd packages/mobile
 yarn init -y
-yarn add react-native react-navigation expo --ignore-workspace-root-check # Use flag to avoid warning
+yarn add react-native react-navigation expo --ignore-workspace-root-check
+yarn add typescript @types/react @types/react-native -D --ignore-workspace-root-check
 touch app.tsx
+# Create TypeScript configuration
+cat <<EOL > tsconfig.json
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "strict": true,
+    "jsx": "react-native"
+  },
+  "include": ["app.tsx"]
+}
+EOL
 cd ../../
 
-# Initialize server (Express app)
+# Initialize server (Express app) package
 echo "Initializing server (Express app)..."
 cd packages/server
 yarn init -y
-yarn add express --ignore-workspace-root-check # Use flag to avoid warning
-yarn add typescript @types/node @types/express ts-node-dev -D --ignore-workspace-root-check # Use flag to avoid warning
-npx tsc --init
+yarn add express --ignore-workspace-root-check
+yarn add typescript @types/node @types/express ts-node-dev -D --ignore-workspace-root-check
 touch index.ts
+# Create TypeScript configuration
+cat <<EOL > tsconfig.json
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "strict": true
+  },
+  "include": ["index.ts"]
+}
+EOL
+echo "Creating basic Express app in TypeScript..."
 cat <<EOL > index.ts
 import express, { Request, Response } from 'express';
 
@@ -76,8 +100,20 @@ cd ../../
 echo "Initializing shared (utilities package)..."
 cd packages/shared
 yarn init -y
-yarn add lodash --ignore-workspace-root-check # Use flag to avoid warning
+yarn add lodash --ignore-workspace-root-check
+yarn add typescript -D --ignore-workspace-root-check
 touch index.ts
+# Create TypeScript configuration
+cat <<EOL > tsconfig.json
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "strict": true
+  },
+  "include": ["index.ts"]
+}
+EOL
 cd ../../
 
 # Create an add-package script for dynamic package creation
@@ -143,20 +179,5 @@ cat <<EOL > .prettierrc
   "printWidth": 80
 }
 EOL
-
-# TypeScript config for each package
-echo "Setting up TypeScript for each package..."
-
-# Shared package (common utilities)
-cd packages/shared
-yarn add typescript -D
-npx tsc --init
-cd ../../
-
-# Mobile (React Native) package
-cd packages/mobile
-yarn add typescript @types/react @types/react-native -D
-npx tsc --init
-cd ../../
 
 echo "Setup complete! Use 'yarn add-package' to add new packages."
