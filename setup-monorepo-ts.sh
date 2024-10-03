@@ -40,22 +40,22 @@ npx lerna init
 # Create packages folder and sub-packages
 mkdir -p packages/{mobile,server,shared}
 
-# Initialize package.json for each package
+# Initialize mobile (Expo app)
 echo "Initializing mobile (Expo app)..."
 cd packages/mobile
 yarn init -y
-yarn add react-native react-navigation expo
+yarn add react-native react-navigation expo --ignore-workspace-root-check # Use flag to avoid warning
 touch app.tsx
 cd ../../
 
+# Initialize server (Express app)
 echo "Initializing server (Express app)..."
 cd packages/server
 yarn init -y
-yarn add express
-yarn add typescript @types/node @types/express ts-node-dev -D
+yarn add express --ignore-workspace-root-check # Use flag to avoid warning
+yarn add typescript @types/node @types/express ts-node-dev -D --ignore-workspace-root-check # Use flag to avoid warning
 npx tsc --init
 touch index.ts
-echo "Creating basic Express app in TypeScript..."
 cat <<EOL > index.ts
 import express, { Request, Response } from 'express';
 
@@ -72,10 +72,11 @@ app.listen(PORT, () => {
 EOL
 cd ../../
 
+# Initialize shared (utilities package)
 echo "Initializing shared (utilities package)..."
 cd packages/shared
 yarn init -y
-yarn add lodash
+yarn add lodash --ignore-workspace-root-check # Use flag to avoid warning
 touch index.ts
 cd ../../
 
