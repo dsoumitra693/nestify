@@ -7,6 +7,9 @@
   "scripts": {
     "test": "rm -rf test-repo && ./index.ts"
   },
+"bin": {
+    "nestify": "./dist/index.js"
+  },
   "dependencies": {
     "prompts": "^2.4.2",
     "ts-node": "^10.9.2",
