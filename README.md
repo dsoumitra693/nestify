@@ -1,6 +1,6 @@
 # Monorepo Setup with TypeScript, ESLint, and Prettier
 
-**Monorepo Magic** is a command-line tool for setting up a scalable monorepo structure using Yarn Workspaces and Lerna. This setup is ideal for projects that require both an Expo React Native app and an Express server, along with shared utilities.
+**Nestify** is a command-line tool for setting up a scalable monorepo structure using Yarn Workspaces and Lerna. This setup is ideal for projects that require both an Expo React Native app and an Express server, along with shared utilities.
 
 ## Features
 
@@ -27,13 +27,13 @@ To get started with **Monorepo Magic**, you can install it globally using npm or
 ### Using npx
 
 ```bash
-npx dsoumitra/nestify
+npx dsoumitra693/nestify
 ```
 
 Install Locally (Optional)
 If you want to install it locally:
 ```bash
-git clone https://github.com/dsoumitra/nestify.git
+git clone https://github.com/dsoumitra693/nestify.git
 cd nestify
 npm install or # yarn install
 ```
@@ -41,7 +41,7 @@ npm install or # yarn install
 Usage
 After installing, you can run the setup command:
 ```bash
-npx dsoumitra/nestify
+npx dsoumitra693/nestify
 #You will be prompted to enter the root folder name for your monorepo.
 ```
 
